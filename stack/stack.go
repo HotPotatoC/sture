@@ -29,7 +29,7 @@ func (s *Stack[V]) Pop() {
 
 // Peek returns the value of the top node in the stack.
 func (s *Stack[V]) Peek() V {
-	return s.list.Head().Value()
+	return s.list.Tail().Value()
 }
 
 // IsEmpty returns true if the stack is empty.
