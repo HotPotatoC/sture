@@ -2,6 +2,10 @@
 
 A collection of data structures based on Go 1.18+ Generics.
 
+##### Why this name?
+
+I basically used an AI to generate the name **sture** 🗿. But... **sture** can be interpreted as "structure".
+
 ## Installation
 
 ```bash
@@ -26,6 +30,17 @@ func main() {
     fmt.Println(top) // John
 }
 ```
+
+## Spec
+
+Supported data structures at the moment:
+
+- [DoubleLinkedList](./linkedlist/linked_list.go)
+- [CircularLinkedList](./linkedlist/circular_linked_list.go)
+- [Queue](./queue/queue.go)
+- [PriorityQueue](./queue/priority_queue.go)
+- [Stack](./stack/stack.go)
+- more to come...
 
 ## Support
 
