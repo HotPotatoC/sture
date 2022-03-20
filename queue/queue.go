@@ -1,17 +1,13 @@
 package queue
 
-import (
-	"golang.org/x/exp/constraints"
-)
-
 // Queue is a queue.
-type Queue[V constraints.Ordered] struct {
+type Queue[V any] struct {
 	list  []V
 	nSize int
 }
 
 // NewQueue returns a new queue.
-func NewQueue[V constraints.Ordered]() *Queue[V] {
+func NewQueue[V any]() *Queue[V] {
 	return &Queue[V]{
 		list: make([]V, 0),
 	}

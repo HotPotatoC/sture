@@ -1,17 +1,13 @@
 package queue
 
-import (
-	"golang.org/x/exp/constraints"
-)
-
 // PriorityQueueNode is a node in a priority queue.
-type PriorityQueueNode[V constraints.Ordered] struct {
+type PriorityQueueNode[V any] struct {
 	value    V
 	priority int
 }
 
 // NewPriorityQueueNode returns a new priority queue node.
-func NewPriorityQueueNode[V constraints.Ordered](value V, priority int) PriorityQueueNode[V] {
+func NewPriorityQueueNode[V any](value V, priority int) PriorityQueueNode[V] {
 	return PriorityQueueNode[V]{value: value, priority: priority}
 }
 

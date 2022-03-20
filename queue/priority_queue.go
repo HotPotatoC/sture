@@ -2,18 +2,16 @@ package queue
 
 import (
 	"fmt"
-
-	"golang.org/x/exp/constraints"
 )
 
 // PriorityQueue is a queue that supports priority-based insertion.
-type PriorityQueue[V constraints.Ordered] struct {
+type PriorityQueue[V any] struct {
 	list  []PriorityQueueNode[V]
 	nSize int
 }
 
 // NewPriorityQueue creates a new priority queue.
-func NewPriorityQueue[V constraints.Ordered]() *PriorityQueue[V] {
+func NewPriorityQueue[V any]() *PriorityQueue[V] {
 	return &PriorityQueue[V]{
 		list: make([]PriorityQueueNode[V], 0),
 	}
