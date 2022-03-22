@@ -73,38 +73,6 @@ func TestLinkedList_InsertAt(t *testing.T) {
 	}
 }
 
-func TestLinkedList_PushMid(t *testing.T) {
-	ll := linkedlist.NewLinkedList[int]()
-	exp := "[1]-[2]-[3]-[4]-[5]"
-
-	ll.Append(1)
-	ll.Append(2)
-	ll.Append(3)
-	ll.Append(4)
-	ll.PushMid(5)
-
-	if ll.String() != exp {
-		t.Errorf("\nExpected: %s\nGot: %s", exp, ll.String())
-	}
-
-	ll.PushMid(-4)
-	ll.PushMid(-2)
-
-	exp = "[-4]-[-2]-[1]-[2]-[3]-[4]-[5]"
-
-	if ll.String() != exp {
-		t.Errorf("\nExpected: %s\nGot: %s", exp, ll.String())
-	}
-
-	ll.PushMid(3)
-
-	exp = "[-4]-[-2]-[1]-[2]-[3]-[3]-[4]-[5]"
-
-	if ll.String() != exp {
-		t.Errorf("\nExpected: %s\nGot: %s", exp, ll.String())
-	}
-}
-
 func TestLinkedList_Pop(t *testing.T) {
 	ll := linkedlist.NewLinkedList[int]()
 	exp := "[1]-[2]-[5]"

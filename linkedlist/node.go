@@ -1,16 +1,14 @@
 package linkedlist
 
-import "golang.org/x/exp/constraints"
-
 // Node is a node in a linked list.
-type Node[V constraints.Ordered] struct {
+type Node[V comparable] struct {
 	value V
 	next  *Node[V]
 	prev  *Node[V]
 }
 
 // NewNode returns a new linked list node.
-func NewNode[V constraints.Ordered](value V) *Node[V] {
+func NewNode[V comparable](value V) *Node[V] {
 	return &Node[V]{value: value}
 }
 

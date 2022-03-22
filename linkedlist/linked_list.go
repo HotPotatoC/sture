@@ -3,19 +3,17 @@ package linkedlist
 import (
 	"errors"
 	"fmt"
-
-	"golang.org/x/exp/constraints"
 )
 
 // LinkedList is a linked list.
-type LinkedList[V constraints.Ordered] struct {
+type LinkedList[V comparable] struct {
 	head  *Node[V]
 	tail  *Node[V]
 	nSize uint
 }
 
 // NewLinkedList returns a new linked list.
-func NewLinkedList[V constraints.Ordered]() *LinkedList[V] {
+func NewLinkedList[V comparable]() *LinkedList[V] {
 	return &LinkedList[V]{}
 }
 
@@ -80,39 +78,6 @@ func (ll *LinkedList[V]) InsertAt(pos int, value V) error {
 	ll.nSize++
 
 	return nil
-}
-
-// PushMid adds a new node to the middle of the list.
-func (ll *LinkedList[V]) PushMid(value V) {
-	newNode := NewNode(value)
-	ll.nSize++
-
-	if ll.head == nil {
-		ll.head = newNode
-		ll.tail = newNode
-		return
-	}
-
-	if ll.head.value > value {
-		ll.PushHead(value)
-		return
-	}
-
-	if ll.tail.value < value {
-		ll.Append(value)
-		return
-	}
-
-	curr := ll.head
-
-	for curr.value < value {
-		curr = curr.next
-	}
-
-	newNode.prev = curr.prev
-	newNode.next = curr
-	curr.prev.next = newNode
-	curr.prev = newNode
 }
 
 // Pop removes the last node from the list.
