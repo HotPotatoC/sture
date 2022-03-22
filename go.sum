@@ -1,2 +1,4 @@
+github.com/cespare/xxhash/v2 v2.1.2 h1:YRXhKfTDauu4ajMg1TPgFO5jnlC2HCbmLXMcTG5cbYE=
+github.com/cespare/xxhash/v2 v2.1.2/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 golang.org/x/exp v0.0.0-20220318154914-8dddf5d87bd8 h1:s/+U+w0teGzcoH2mdIlFQ6KfVKGaYpgyGdUefZrn9TU=
 golang.org/x/exp v0.0.0-20220318154914-8dddf5d87bd8/go.mod h1:lgLbSvA5ygNOMpwM/9anMpWVlVJ7Z+cHWq/eFuinpGE=
