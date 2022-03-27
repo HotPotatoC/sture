@@ -6,8 +6,8 @@ import (
 	"github.com/HotPotatoC/sture/queue"
 )
 
-func TestCircularQueue_Enqueue(t *testing.T) {
-	cq := queue.NewCircularQueue[int](6)
+func TestRingBuffer_Enqueue(t *testing.T) {
+	cq := queue.NewRingBuffer[int](6)
 
 	ok := cq.Enqueue(1)
 	if !ok {
@@ -50,8 +50,8 @@ func TestCircularQueue_Enqueue(t *testing.T) {
 	}
 }
 
-func TestCircularQueue_Dequeue(t *testing.T) {
-	cq := queue.NewCircularQueue[int](6)
+func TestRingBuffer_Dequeue(t *testing.T) {
+	cq := queue.NewRingBuffer[int](6)
 
 	ok := cq.Enqueue(1)
 	if !ok {
