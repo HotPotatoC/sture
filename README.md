@@ -35,11 +35,14 @@ func main() {
 
 Supported data structures at the moment:
 
-- [DoubleLinkedList](./linkedlist/linked_list.go)
-- [CircularLinkedList](./linkedlist/circular_linked_list.go)
+- [Linked List](./linkedlist/linked_list.go)
 - [Queue](./queue/queue.go)
-- [PriorityQueue](./queue/priority_queue.go)
+- [Priority Queue](./queue/priority_queue.go)
+- [Ring Buffer](./queue/ring_buffer.go)
+- [Deque](./queue/deque.go)
 - [Stack](./stack/stack.go)
+- [Hash Table](./hashtable/hashtable.go)
+- [Chained Hash Table](./hashtable/chained_hashtable.go)
 - more to come...
 
 ## Support
