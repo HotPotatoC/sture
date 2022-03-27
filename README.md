@@ -2,7 +2,7 @@
 
 A collection of data structures based on Go 1.18+ Generics.
 
-##### Why this name?
+### Why this name?
 
 I basically used an AI to generate the name **sture** 🗿. But... **sture** can be interpreted as "structure".
 
