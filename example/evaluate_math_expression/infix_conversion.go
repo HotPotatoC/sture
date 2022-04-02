@@ -63,22 +63,24 @@ func infixToPostfixExpression(expression string) string {
 }
 
 func infixToPrefixExpression(expression string) string {
-	return stringReverse(infixToPostfixExpression(stringReverse(expression)))
+	revExp := []rune(stringReverse(expression))
+
+	// if rune is '(' replace it with ')' and vice versa
+	for i := 0; i < len(revExp); i++ {
+		if revExp[i] == '(' {
+			revExp[i] = ')'
+		} else if revExp[i] == ')' {
+			revExp[i] = '('
+		}
+	}
+
+	return stringReverse(infixToPostfixExpression(string(revExp)))
 }
 
 func stringReverse(s string) string {
 	runes := []rune(s)
 	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
 		runes[i], runes[j] = runes[j], runes[i]
-	}
-
-	// if rune is '(' replace it with ')' and vice versa
-	for i := 0; i < len(runes); i++ {
-		if runes[i] == '(' {
-			runes[i] = ')'
-		} else if runes[i] == ')' {
-			runes[i] = '('
-		}
 	}
 
 	return string(runes)
