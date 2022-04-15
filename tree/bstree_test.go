@@ -1,7 +1,6 @@
 package tree_test
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/HotPotatoC/sture"
@@ -114,8 +113,10 @@ func TestBSTree_Inorder(t *testing.T) {
 	list := bst.Inorder()
 	exp := []int{1, 3, 4, 6, 10}
 
-	if !reflect.DeepEqual(list, exp) {
-		t.Errorf("bst.Inorder() = %v, want %v", list, exp)
+	for i, v := range list {
+		if v.Key() != exp[i] && v.Value() != exp[i] {
+			t.Errorf("bst.Inorder()[%d] = %v, want %v", i, v, exp[i])
+		}
 	}
 }
 
@@ -131,8 +132,10 @@ func TestBSTree_Preorder(t *testing.T) {
 	list := bst.Preorder()
 	exp := []int{3, 1, 10, 6, 4}
 
-	if !reflect.DeepEqual(list, exp) {
-		t.Errorf("bst.Preorder() = %v, want %v", list, exp)
+	for i, v := range list {
+		if v.Key() != exp[i] && v.Value() != exp[i] {
+			t.Errorf("bst.Inorder()[%d] = %v, want %v", i, v, exp[i])
+		}
 	}
 }
 
@@ -148,7 +151,9 @@ func TestBSTree_Postorder(t *testing.T) {
 	list := bst.Postorder()
 	exp := []int{1, 4, 6, 10, 3}
 
-	if !reflect.DeepEqual(list, exp) {
-		t.Errorf("bst.Postorder() = %v, want %v", list, exp)
+	for i, v := range list {
+		if v.Key() != exp[i] && v.Value() != exp[i] {
+			t.Errorf("bst.Inorder()[%d] = %v, want %v", i, v, exp[i])
+		}
 	}
 }
