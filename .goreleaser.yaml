@@ -1,0 +1,14 @@
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - skip: true # skip build, since this is a library
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
