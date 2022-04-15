@@ -5,25 +5,25 @@ import (
 )
 
 // PriorityQueue is a queue that supports priority-based insertion.
-type PriorityQueue[V any] struct {
-	list  []PriorityQueueNode[V]
+type PriorityQueue[T any] struct {
+	list  []PriorityQueueNode[T]
 	nSize int
 }
 
 // NewPriorityQueue creates a new priority queue.
-func NewPriorityQueue[V any]() *PriorityQueue[V] {
-	return &PriorityQueue[V]{
-		list: make([]PriorityQueueNode[V], 0),
+func NewPriorityQueue[T any]() *PriorityQueue[T] {
+	return &PriorityQueue[T]{
+		list: make([]PriorityQueueNode[T], 0),
 	}
 }
 
 // Enqueue adds a new node at a certain position in the queue based on the priority.
-func (q *PriorityQueue[V]) Enqueue(value V, priority int) {
+func (q *PriorityQueue[T]) Enqueue(value T, priority int) {
 	newNode := NewPriorityQueueNode(value, priority)
 
 	pos := q.search(priority) // search for the position to insert the new node
 
-	q.list = append(q.list, PriorityQueueNode[V]{}) // add empty node
+	q.list = append(q.list, PriorityQueueNode[T]{}) // add empty node
 
 	copy(q.list[pos+1:], q.list[pos:]) // shift elements to the right
 
@@ -32,7 +32,7 @@ func (q *PriorityQueue[V]) Enqueue(value V, priority int) {
 }
 
 // Dequeue removes the last node from the queue.
-func (q *PriorityQueue[V]) Dequeue() {
+func (q *PriorityQueue[T]) Dequeue() {
 	if q.nSize == 0 {
 		return
 	}
@@ -42,17 +42,17 @@ func (q *PriorityQueue[V]) Dequeue() {
 }
 
 // Peek returns the value of the node with the highest priority in the queue.
-func (q *PriorityQueue[V]) Peek() V {
+func (q *PriorityQueue[T]) Peek() T {
 	return q.list[q.nSize-1].Value()
 }
 
 // IsEmpty returns true if the queue is empty.
-func (q *PriorityQueue[V]) IsEmpty() bool {
+func (q *PriorityQueue[T]) IsEmpty() bool {
 	return q.nSize == 0
 }
 
 // String returns a string representation of the queue.
-func (q *PriorityQueue[V]) String() string {
+func (q *PriorityQueue[T]) String() string {
 	var s string
 
 	for idx, node := range q.list {
@@ -66,7 +66,7 @@ func (q *PriorityQueue[V]) String() string {
 }
 
 // search returns the position of the node that is the closest to the given priority.
-func (q *PriorityQueue[V]) search(priority int) int {
+func (q *PriorityQueue[T]) search(priority int) int {
 	low, high := 0, q.nSize
 	for low < high {
 		mid := int(uint(low+high) >> 1) // avoid overflow when computing mid

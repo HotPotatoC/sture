@@ -1,29 +1,29 @@
 package bstree
 
 // BSTree is a binary tree data structure.
-type BSTree[V any] struct {
-	root *Node[V]
-	cmp  func(V, V) int
+type BSTree[T any] struct {
+	root *Node[T]
+	cmp  func(T, T) int
 }
 
 // New returns a new binary search tree with the given value as the root.
 // The second parameter is a function that returns -1, 0, or 1 depending on whether x < y, x == y, or x > y
 // Example Usage:
 //	bstree.New(1, sture.Compare[int])
-func New[V any](rootVal V, cmp func(a, b V) int) *BSTree[V] {
-	return &BSTree[V]{
+func New[T any](rootVal T, cmp func(a, b T) int) *BSTree[T] {
+	return &BSTree[T]{
 		root: NewNode(rootVal),
 		cmp:  cmp,
 	}
 }
 
 // Root returns the root of the tree
-func (bst *BSTree[V]) Root() *Node[V] {
+func (bst *BSTree[T]) Root() *Node[T] {
 	return bst.root
 }
 
 // Search returns the node with the given value if it exists in the tree.
-func (bst *BSTree[V]) Search(root *Node[V], query V) *Node[V] {
+func (bst *BSTree[T]) Search(root *Node[T], query T) *Node[T] {
 	if root == nil || bst.cmp(root.value, query) == 0 {
 		return root
 	}
@@ -42,7 +42,7 @@ func (bst *BSTree[V]) Search(root *Node[V], query V) *Node[V] {
 }
 
 // Insert inserts a new node into the tree.
-func (bst *BSTree[V]) Insert(root *Node[V], value V) *Node[V] {
+func (bst *BSTree[T]) Insert(root *Node[T], value T) *Node[T] {
 	// if the root is nil, then we know we are inserting at this node
 	if root == nil {
 		return NewNode(value)
@@ -75,7 +75,7 @@ func (bst *BSTree[V]) Insert(root *Node[V], value V) *Node[V] {
 }
 
 // InorderSuccessor returns the inorder successor of the given node.
-func (bst *BSTree[V]) InorderSuccessor(root *Node[V]) *Node[V] {
+func (bst *BSTree[T]) InorderSuccessor(root *Node[T]) *Node[T] {
 	curr := root
 	for curr != nil && curr.left != nil {
 		curr = curr.left
@@ -84,7 +84,7 @@ func (bst *BSTree[V]) InorderSuccessor(root *Node[V]) *Node[V] {
 }
 
 // Remove removes the node with the given value from the tree.
-func (bst *BSTree[V]) Remove(node *Node[V], query V) *Node[V] {
+func (bst *BSTree[T]) Remove(node *Node[T], query T) *Node[T] {
 	if node == nil {
 		return nil
 	}
@@ -130,14 +130,14 @@ func (bst *BSTree[V]) Remove(node *Node[V], query V) *Node[V] {
 }
 
 // Inorder returns the values of the tree in order.
-func (bst *BSTree[V]) Inorder(root *Node[V]) []V {
-	nodes := make([]V, 0)
+func (bst *BSTree[T]) Inorder(root *Node[T]) []T {
+	nodes := make([]T, 0)
 	bst.inorder(root, &nodes)
 	return nodes
 
 }
 
-func (bst *BSTree[V]) inorder(root *Node[V], dst *[]V) {
+func (bst *BSTree[T]) inorder(root *Node[T], dst *[]T) {
 	if root != nil {
 		bst.inorder(root.left, dst)
 		*dst = append(*dst, root.value)
@@ -146,14 +146,14 @@ func (bst *BSTree[V]) inorder(root *Node[V], dst *[]V) {
 }
 
 // Preorder returns the values of the tree in preorder.
-func (bst *BSTree[V]) Preorder(root *Node[V]) []V {
-	nodes := make([]V, 0)
+func (bst *BSTree[T]) Preorder(root *Node[T]) []T {
+	nodes := make([]T, 0)
 	bst.preorder(root, &nodes)
 	return nodes
 
 }
 
-func (bst *BSTree[V]) preorder(root *Node[V], dst *[]V) {
+func (bst *BSTree[T]) preorder(root *Node[T], dst *[]T) {
 	if root != nil {
 		*dst = append(*dst, root.value)
 		bst.preorder(root.left, dst)
@@ -162,14 +162,14 @@ func (bst *BSTree[V]) preorder(root *Node[V], dst *[]V) {
 }
 
 // Postorder returns the values of the tree in postorder.
-func (bst *BSTree[V]) Postorder(root *Node[V]) []V {
-	nodes := make([]V, 0)
+func (bst *BSTree[T]) Postorder(root *Node[T]) []T {
+	nodes := make([]T, 0)
 	bst.postorder(root, &nodes)
 	return nodes
 
 }
 
-func (bst *BSTree[V]) postorder(root *Node[V], dst *[]V) {
+func (bst *BSTree[T]) postorder(root *Node[T], dst *[]T) {
 	if root != nil {
 		bst.postorder(root.left, dst)
 		bst.postorder(root.right, dst)

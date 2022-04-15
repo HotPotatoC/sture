@@ -5,21 +5,21 @@ import (
 )
 
 // RingBuffer is a queue that supports circular insertion and removal.
-type RingBuffer[V any] struct {
-	list  []V
+type RingBuffer[T any] struct {
+	list  []T
 	cap   int
 	front int
 	rear  int
 }
 
 // NewRingBuffer creates a new circular queue with the given capacity.
-func NewRingBuffer[V any](cap int) *RingBuffer[V] {
+func NewRingBuffer[T any](cap int) *RingBuffer[T] {
 	if cap <= 0 {
 		return nil
 	}
 
-	return &RingBuffer[V]{
-		list:  make([]V, cap),
+	return &RingBuffer[T]{
+		list:  make([]T, cap),
 		cap:   cap,
 		front: 0,
 		rear:  0,
@@ -27,27 +27,27 @@ func NewRingBuffer[V any](cap int) *RingBuffer[V] {
 }
 
 // Front returns the value of the first node in the queue.
-func (cq *RingBuffer[V]) Front() V {
+func (cq *RingBuffer[T]) Front() T {
 	return cq.list[cq.front]
 }
 
 // Rear returns the value of the last node in the queue.
-func (cq *RingBuffer[V]) Rear() V {
+func (cq *RingBuffer[T]) Rear() T {
 	return cq.list[cq.rear]
 }
 
 // IsFull returns true if the queue is full.
-func (cq *RingBuffer[V]) IsFull() bool {
+func (cq *RingBuffer[T]) IsFull() bool {
 	return cq.front == (cq.rear+1)%cq.cap
 }
 
 // IsEmpty returns true if the queue is empty.
-func (cq *RingBuffer[V]) IsEmpty() bool {
+func (cq *RingBuffer[T]) IsEmpty() bool {
 	return cq.rear == cq.front
 }
 
 // Enqueue adds a new node at the rear of the queue.
-func (cq *RingBuffer[V]) Enqueue(value V) bool {
+func (cq *RingBuffer[T]) Enqueue(value T) bool {
 	if cq.IsFull() {
 		return false
 	}
@@ -59,20 +59,20 @@ func (cq *RingBuffer[V]) Enqueue(value V) bool {
 }
 
 // Dequeue removes the first node from the queue.
-func (cq *RingBuffer[V]) Dequeue() V {
+func (cq *RingBuffer[T]) Dequeue() T {
 	if cq.IsEmpty() {
-		return *new(V) // return nil
+		return *new(T) // return nil
 	}
 
 	value := cq.list[cq.front]
-	cq.list[cq.front] = *new(V) // clear the value
+	cq.list[cq.front] = *new(T) // clear the value
 	cq.front = (cq.front + 1) % cq.cap
 
 	return value
 }
 
 // String returns a string representation of the queue.
-func (cq *RingBuffer[V]) String() string {
+func (cq *RingBuffer[T]) String() string {
 	if cq.IsEmpty() {
 		return "[]"
 	}

@@ -6,20 +6,20 @@ import (
 )
 
 // LinkedList is a linked list.
-type LinkedList[V any] struct {
-	head  *Node[V]
-	tail  *Node[V]
+type LinkedList[T any] struct {
+	head  *Node[T]
+	tail  *Node[T]
 	nSize uint
-	cmp   func(V, V) int
+	cmp   func(T, T) int
 }
 
 // NewLinkedList returns a new linked list.
-func NewLinkedList[V any](cmp func(V, V) int) *LinkedList[V] {
-	return &LinkedList[V]{cmp: cmp}
+func NewLinkedList[T any](cmp func(T, T) int) *LinkedList[T] {
+	return &LinkedList[T]{cmp: cmp}
 }
 
 // Append adds a new node to the end of the list.
-func (ll *LinkedList[V]) Append(value V) {
+func (ll *LinkedList[T]) Append(value T) {
 	newNode := NewNode(value)
 	ll.nSize++
 
@@ -35,7 +35,7 @@ func (ll *LinkedList[V]) Append(value V) {
 }
 
 // PushHead adds a new node to the head of the list.
-func (ll *LinkedList[V]) PushHead(value V) {
+func (ll *LinkedList[T]) PushHead(value T) {
 	newNode := NewNode(value)
 	ll.nSize++
 
@@ -51,7 +51,7 @@ func (ll *LinkedList[V]) PushHead(value V) {
 }
 
 // InsertAt adds a new node to the given position
-func (ll *LinkedList[V]) InsertAt(pos int, value V) error {
+func (ll *LinkedList[T]) InsertAt(pos int, value T) error {
 	newNode := NewNode(value)
 
 	if pos < 1 || uint(pos) > ll.nSize {
@@ -82,7 +82,7 @@ func (ll *LinkedList[V]) InsertAt(pos int, value V) error {
 }
 
 // Pop removes the last node from the list.
-func (ll *LinkedList[V]) Pop() {
+func (ll *LinkedList[T]) Pop() {
 	if ll.head == nil {
 		return
 	}
@@ -101,7 +101,7 @@ func (ll *LinkedList[V]) Pop() {
 }
 
 // PopHead removes the first node from the list.
-func (ll *LinkedList[V]) PopHead() {
+func (ll *LinkedList[T]) PopHead() {
 	if ll.head == nil {
 		return
 	}
@@ -120,7 +120,7 @@ func (ll *LinkedList[V]) PopHead() {
 }
 
 // Find returns the node with the given value.
-func (ll *LinkedList[V]) Find(value V) *Node[V] {
+func (ll *LinkedList[T]) Find(value T) *Node[T] {
 	curr := ll.head
 
 	for curr != nil {
@@ -135,7 +135,7 @@ func (ll *LinkedList[V]) Find(value V) *Node[V] {
 }
 
 // String returns a string representation of the list.
-func (ll *LinkedList[V]) String() string {
+func (ll *LinkedList[T]) String() string {
 	var s string
 
 	curr := ll.head
@@ -153,21 +153,21 @@ func (ll *LinkedList[V]) String() string {
 }
 
 // Head returns the head node of the list.
-func (ll *LinkedList[V]) Head() *Node[V] {
+func (ll *LinkedList[T]) Head() *Node[T] {
 	return ll.head
 }
 
 // Tail returns the tail node of the list.
-func (ll *LinkedList[V]) Tail() *Node[V] {
+func (ll *LinkedList[T]) Tail() *Node[T] {
 	return ll.tail
 }
 
 // Size returns the size of the list.
-func (ll *LinkedList[V]) Size() uint {
+func (ll *LinkedList[T]) Size() uint {
 	return ll.nSize
 }
 
 // IsEmpty returns true if the list is empty.
-func (ll *LinkedList[V]) IsEmpty() bool {
+func (ll *LinkedList[T]) IsEmpty() bool {
 	return ll.head == nil
 }
