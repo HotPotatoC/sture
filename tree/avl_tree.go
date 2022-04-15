@@ -4,6 +4,7 @@ import (
 	"github.com/HotPotatoC/sture"
 )
 
+// AVLTree is a self-balancing binary search tree.
 type AVLTree[K any, V any] struct {
 	// root is the root of the tree
 	root *AVLNode[K, V]

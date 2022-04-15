@@ -2,7 +2,10 @@ package tree
 
 // BSTree is a binary tree data structure.
 type BSTree[K, V any] struct {
+	// root is the root node of the tree.
 	root *BSTNode[K, V]
+	// cmp is a function that returns -1, 0, or 1 depending on whether x < y, x == y, or x > y
+	// (used for comparing keys)
 	cmp  func(K, K) int
 }
 
