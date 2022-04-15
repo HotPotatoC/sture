@@ -31,10 +31,14 @@ func main() {
 }
 ```
 
+See more examples [here](./example/)
+
 ## Spec
 
 Supported data structures at the moment:
 
+- [Binary search tree](./tree/bstree.go)
+- [AVL tree](./tree/avl_tree.go)
 - [Linked List](./linkedlist/linked_list.go)
 - [Queue](./queue/queue.go)
 - [Priority Queue](./queue/priority_queue.go)
