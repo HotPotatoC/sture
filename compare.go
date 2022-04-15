@@ -12,3 +12,21 @@ func Compare[T constraints.Ordered](x, y T) int {
 
 	return 0
 }
+
+// Max returns the maximum of two values.
+func Max[T constraints.Ordered](x, y T) T {
+	if x > y {
+		return x
+	}
+
+	return y
+}
+
+// Min returns the minimum of two values.
+func Min[T constraints.Ordered](x, y T) T {
+	if x < y {
+		return x
+	}
+
+	return y
+}

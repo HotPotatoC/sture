@@ -1,4 +1,4 @@
-package bstree_test
+package tree_test
 
 import (
 	"math"
@@ -7,26 +7,22 @@ import (
 	"time"
 
 	"github.com/HotPotatoC/sture"
-	"github.com/HotPotatoC/sture/bstree"
+	"github.com/HotPotatoC/sture/tree"
 )
 
 func init() {
 	rand.Seed(time.Now().Unix())
 }
 
-func randomIntRange(min, max int) int {
-	return rand.Intn(max-min) + min
-}
-
-func BenchmarkBSTree_InsertRandom(b *testing.B) {
-	bst := bstree.New(1, sture.Compare[int])
+func BenchmarkAVLTree_Insert(b *testing.B) {
+	avl := tree.NewAVLTree[int, int](sture.Compare[int])
 
 	for i := 0; i < b.N; i++ {
-		_ = bst.Insert(bst.Root(), randomIntRange(1, 10000))
+		avl.Insert(i, i)
 	}
 }
 
-func BenchmarkBSTree_SearchRandom_N(b *testing.B) {
+func BenchmarkAVLTree_SearchRandom_N(b *testing.B) {
 	bc := []struct {
 		name string
 		size int
@@ -40,13 +36,13 @@ func BenchmarkBSTree_SearchRandom_N(b *testing.B) {
 
 	for _, bb := range bc {
 		b.Run(bb.name, func(b *testing.B) {
-			bst := bstree.New(randomIntRange(1, bb.size), sture.Compare[int])
+			avl := tree.NewAVLTree[int, int](sture.Compare[int])
 
 			min := math.MaxInt
 
 			for i := 0; i < bb.size; i++ {
 				n := randomIntRange(1, bb.size)
-				_ = bst.Insert(bst.Root(), n)
+				avl.Insert(n, n)
 
 				if min > n {
 					min = n
@@ -55,13 +51,13 @@ func BenchmarkBSTree_SearchRandom_N(b *testing.B) {
 
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				_ = bst.Search(bst.Root(), randomIntRange(min, bb.size))
+				_ = avl.Search(randomIntRange(min, bb.size))
 			}
 		})
 	}
 }
 
-func BenchmarkBSTree_RemoveRandom_N(b *testing.B) {
+func BenchmarkAVLTree_RemoveRandom_N(b *testing.B) {
 	bc := []struct {
 		name string
 		size int
@@ -75,13 +71,13 @@ func BenchmarkBSTree_RemoveRandom_N(b *testing.B) {
 
 	for _, bb := range bc {
 		b.Run(bb.name, func(b *testing.B) {
-			bst := bstree.New(randomIntRange(1, bb.size), sture.Compare[int])
+			avl := tree.NewAVLTree[int, int](sture.Compare[int])
 
 			min := math.MaxInt
 
 			for i := 0; i < bb.size; i++ {
 				n := randomIntRange(1, bb.size)
-				_ = bst.Insert(bst.Root(), n)
+				avl.Insert(n, n)
 
 				if min > n {
 					min = n
@@ -90,7 +86,7 @@ func BenchmarkBSTree_RemoveRandom_N(b *testing.B) {
 
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				_ = bst.Remove(bst.Root(), randomIntRange(min, bb.size))
+				avl.Remove(randomIntRange(min, bb.size))
 			}
 		})
 	}

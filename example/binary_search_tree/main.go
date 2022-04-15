@@ -4,24 +4,54 @@ import (
 	"fmt"
 
 	"github.com/HotPotatoC/sture"
-	"github.com/HotPotatoC/sture/bstree"
+	"github.com/HotPotatoC/sture/tree"
 )
 
+type user struct {
+	id    int
+	name  string
+	email string
+}
+
 func main() {
-	bst := bstree.New(8, sture.Compare[int])
+	bst := tree.NewBinarySearchTree[string, user](sture.Compare[string])
 
-	bst.Insert(bst.Root(), 3)
-	bst.Insert(bst.Root(), 10)
-	bst.Insert(bst.Root(), 1)
-	bst.Insert(bst.Root(), 6)
-	bst.Insert(bst.Root(), 4)
-	bst.Insert(bst.Root(), 7)
+	inputs := []struct {
+		key  string
+		data user
+	}{
+		{"user::3", user{3, "Jane Doe", "janedoe@gmail.com"}},
+		{"user::2", user{2, "Richard Roe", "richardroe@gmail.com"}},
+		{"user::5", user{5, "Juan Christian", "juandotulung@gmail.com"}},
+		{"user::1", user{1, "John Doe", "johndoe@gmail.com"}},
+		{"user::4", user{4, "Johnny Doe", "johnnydoe@gmail.com"}},
+		{"user::6", user{6, "Janie Doe", "janiedoe@gmail.com"}},
+	}
 
-	fmt.Printf("%+v\n", bst.Search(bst.Root(), 3))
-	bst.Remove(bst.Root(), 3)
-	fmt.Printf("%+v\n", bst.Search(bst.Root(), 3)) // nil
+	for _, inp := range inputs {
+		bst.Insert(inp.key, inp.data)
+	}
 
-	fmt.Println(bst.Inorder(bst.Root()))   // [1 4 6 7 8 10]
-	fmt.Println(bst.Preorder(bst.Root()))  // [8 4 1 6 7 10]
-	fmt.Println(bst.Postorder(bst.Root())) // [1 7 6 4 10 8]
+	node := bst.Search("user::3")
+	fmt.Println(node)
+
+	inorder := bst.Inorder()
+	preorder := bst.Preorder()
+	postorder := bst.Postorder()
+
+	for _, node := range inorder {
+		fmt.Printf("key: %s, name: %s\n", node.Key(), node.Value().name)
+	}
+
+	fmt.Println()
+
+	for _, node := range preorder {
+		fmt.Printf("key: %s, name: %s\n", node.Key(), node.Value().name)
+	}
+
+	fmt.Println()
+
+	for _, node := range postorder {
+		fmt.Printf("key: %s, name: %s\n", node.Key(), node.Value().name)
+	}
 }
