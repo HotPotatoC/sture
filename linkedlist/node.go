@@ -1,14 +1,14 @@
 package linkedlist
 
 // Node is a node in a linked list.
-type Node[V comparable] struct {
+type Node[V any] struct {
 	value V
 	next  *Node[V]
 	prev  *Node[V]
 }
 
 // NewNode returns a new linked list node.
-func NewNode[V comparable](value V) *Node[V] {
+func NewNode[V any](value V) *Node[V] {
 	return &Node[V]{value: value}
 }
 

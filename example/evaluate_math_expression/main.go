@@ -7,6 +7,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/stack"
 )
 
@@ -20,7 +21,7 @@ var operators = map[string]int{
 }
 
 func evalMathExpressionPostfix(expression string) int {
-	result := stack.NewStack[int]()
+	result := stack.NewStack(sture.Compare[int])
 
 	exp := strings.Split(expression, " ")
 
@@ -58,7 +59,7 @@ func evalMathExpressionPostfix(expression string) int {
 }
 
 func evalMathExpressionPrefix(expression string) int {
-	result := stack.NewStack[int]()
+	result := stack.NewStack(sture.Compare[int])
 
 	exp := strings.Split(expression, " ")
 

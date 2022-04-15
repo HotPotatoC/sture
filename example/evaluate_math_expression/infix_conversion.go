@@ -5,13 +5,14 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/stack"
 )
 
 func infixToPostfixExpression(expression string) string {
 	postfixStr := ""
 
-	opStack := stack.NewStack[string]()
+	opStack := stack.NewStack(sture.Compare[string])
 
 	exp := strings.Split(expression, " ")
 

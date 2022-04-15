@@ -1,15 +1,13 @@
 package bstree
 
-import "golang.org/x/exp/constraints"
-
 // Node is a node in a binary search tree.
-type Node[V constraints.Ordered] struct {
+type Node[V any] struct {
 	value       V
 	left, right *Node[V]
 }
 
 // NewNode returns a new node with the given value.
-func NewNode[V constraints.Ordered](value V) *Node[V] {
+func NewNode[V any](value V) *Node[V] {
 	return &Node[V]{value: value}
 }
 

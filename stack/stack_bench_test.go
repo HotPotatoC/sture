@@ -3,11 +3,12 @@ package stack_test
 import (
 	"testing"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/stack"
 )
 
 func BenchmarkStack_Add(b *testing.B) {
-	s := stack.NewStack[int]()
+	s := stack.NewStack(sture.Compare[int])
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		s.Add(i)
@@ -15,7 +16,7 @@ func BenchmarkStack_Add(b *testing.B) {
 }
 
 func BenchmarkStack_Pop(b *testing.B) {
-	s := stack.NewStack[int]()
+	s := stack.NewStack(sture.Compare[int])
 
 	bc := []struct {
 		name string

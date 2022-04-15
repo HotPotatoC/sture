@@ -6,15 +6,16 @@ import (
 )
 
 // LinkedList is a linked list.
-type LinkedList[V comparable] struct {
+type LinkedList[V any] struct {
 	head  *Node[V]
 	tail  *Node[V]
 	nSize uint
+	cmp   func(V, V) int
 }
 
 // NewLinkedList returns a new linked list.
-func NewLinkedList[V comparable]() *LinkedList[V] {
-	return &LinkedList[V]{}
+func NewLinkedList[V any](cmp func(V, V) int) *LinkedList[V] {
+	return &LinkedList[V]{cmp: cmp}
 }
 
 // Append adds a new node to the end of the list.
@@ -123,7 +124,7 @@ func (ll *LinkedList[V]) Find(value V) *Node[V] {
 	curr := ll.head
 
 	for curr != nil {
-		if curr.value == value {
+		if ll.cmp(curr.value, value) == 0 {
 			return curr
 		}
 

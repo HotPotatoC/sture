@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/bstree"
 )
 
 func main() {
-	bst := bstree.New(8)
+	bst := bstree.New(8, sture.Compare[int])
 
 	bst.Insert(bst.Root(), 3)
 	bst.Insert(bst.Root(), 10)

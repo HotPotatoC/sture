@@ -2,18 +2,18 @@ package stack
 
 import (
 	"github.com/HotPotatoC/sture/linkedlist"
-	"golang.org/x/exp/constraints"
 )
 
 // Stack is a stack.
-type Stack[V constraints.Ordered] struct {
+type Stack[V any] struct {
 	list *linkedlist.LinkedList[V]
+	cmp  func(V, V) int
 }
 
 // NewStack returns a new stack.
-func NewStack[V constraints.Ordered]() *Stack[V] {
+func NewStack[V any](cmp func(V, V) int) *Stack[V] {
 	return &Stack[V]{
-		list: linkedlist.NewLinkedList[V](),
+		list: linkedlist.NewLinkedList(cmp),
 	}
 }
 

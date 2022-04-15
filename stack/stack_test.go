@@ -3,11 +3,12 @@ package stack_test
 import (
 	"testing"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/stack"
 )
 
 func TestAdd(t *testing.T) {
-	s := stack.NewStack[int]()
+	s := stack.NewStack(sture.Compare[int])
 	s.Add(1)
 	s.Add(2)
 	s.Add(3)
@@ -22,7 +23,7 @@ func TestAdd(t *testing.T) {
 }
 
 func TestPop(t *testing.T) {
-	s := stack.NewStack[int]()
+	s := stack.NewStack(sture.Compare[int])
 	s.Add(1)
 	s.Add(2)
 	s.Add(3)

@@ -3,11 +3,12 @@ package linkedlist_test
 import (
 	"testing"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/linkedlist"
 )
 
 func BenchmarkLinkedList_Append(b *testing.B) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -16,7 +17,7 @@ func BenchmarkLinkedList_Append(b *testing.B) {
 }
 
 func BenchmarkLinkedList_PushHead(b *testing.B) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -25,7 +26,7 @@ func BenchmarkLinkedList_PushHead(b *testing.B) {
 }
 
 func BenchmarkLinkedList_InsertAt(b *testing.B) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -34,7 +35,7 @@ func BenchmarkLinkedList_InsertAt(b *testing.B) {
 }
 
 func BenchmarkLinkedList_Pop(b *testing.B) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 
 	bc := []struct {
 		name string
@@ -86,7 +87,7 @@ func benchmarkLinkedListPop10m(b *testing.B, ll *linkedlist.LinkedList[int]) {
 }
 
 func BenchmarkLinkedList_PopHead(b *testing.B) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 
 	bc := []struct {
 		name string
@@ -138,7 +139,7 @@ func benchmarkLinkedListPopHead10m(b *testing.B, ll *linkedlist.LinkedList[int])
 }
 
 func BenchmarkLinkedList_Find(b *testing.B) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 
 	bc := []struct {
 		name string

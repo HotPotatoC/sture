@@ -4,11 +4,12 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/bstree"
 )
 
 func TestBStree_Insert(t *testing.T) {
-	bst := bstree.New(8)
+	bst := bstree.New(8, sture.Compare[int])
 
 	bst.Insert(bst.Root(), 3)
 	bst.Insert(bst.Root(), 10)
@@ -42,7 +43,7 @@ func TestBStree_Insert(t *testing.T) {
 }
 
 func TestBSTree_Search(t *testing.T) {
-	bst := bstree.New(8)
+	bst := bstree.New(8, sture.Compare[int])
 
 	bst.Insert(bst.Root(), 3)
 	bst.Insert(bst.Root(), 10)
@@ -76,7 +77,7 @@ func TestBSTree_Search(t *testing.T) {
 }
 
 func TestBSTree_Remove(t *testing.T) {
-	bst := bstree.New(8)
+	bst := bstree.New(8, sture.Compare[int])
 
 	bst.Insert(bst.Root(), 3)
 	bst.Insert(bst.Root(), 10)
@@ -103,7 +104,7 @@ func TestBSTree_Remove(t *testing.T) {
 }
 
 func TestBSTree_Inorder(t *testing.T) {
-	bst := bstree.New(8)
+	bst := bstree.New(8, sture.Compare[int])
 
 	bst.Insert(bst.Root(), 3)
 	bst.Insert(bst.Root(), 10)
@@ -120,7 +121,7 @@ func TestBSTree_Inorder(t *testing.T) {
 }
 
 func TestBSTree_Preorder(t *testing.T) {
-	bst := bstree.New(8)
+	bst := bstree.New(8, sture.Compare[int])
 
 	bst.Insert(bst.Root(), 3)
 	bst.Insert(bst.Root(), 10)
@@ -137,7 +138,7 @@ func TestBSTree_Preorder(t *testing.T) {
 }
 
 func TestBSTree_Postorder(t *testing.T) {
-	bst := bstree.New(8)
+	bst := bstree.New(8, sture.Compare[int])
 
 	bst.Insert(bst.Root(), 3)
 	bst.Insert(bst.Root(), 10)

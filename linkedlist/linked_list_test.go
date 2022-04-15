@@ -3,11 +3,12 @@ package linkedlist_test
 import (
 	"testing"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/linkedlist"
 )
 
 func TestLinkedList_Append(t *testing.T) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 	exp := "[1]-[2]-[3]-[4]-[5]"
 
 	ll.Append(1)
@@ -22,7 +23,7 @@ func TestLinkedList_Append(t *testing.T) {
 }
 
 func TestLinkedList_PushHead(t *testing.T) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 	exp := "[5]-[4]-[3]-[2]-[1]"
 
 	ll.PushHead(1)
@@ -37,7 +38,7 @@ func TestLinkedList_PushHead(t *testing.T) {
 }
 
 func TestLinkedList_InsertAt(t *testing.T) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 
 	ll.Append(1)
 	ll.Append(2)
@@ -74,7 +75,7 @@ func TestLinkedList_InsertAt(t *testing.T) {
 }
 
 func TestLinkedList_Pop(t *testing.T) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 	exp := "[1]-[2]-[5]"
 
 	ll.Append(1)
@@ -108,7 +109,7 @@ func TestLinkedList_Pop(t *testing.T) {
 }
 
 func TestLinkedList_PopHead(t *testing.T) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 	exp := "[5]-[2]-[1]"
 
 	ll.PushHead(1)
@@ -142,7 +143,7 @@ func TestLinkedList_PopHead(t *testing.T) {
 }
 
 func TestLinkedList_Find(t *testing.T) {
-	ll := linkedlist.NewLinkedList[int]()
+	ll := linkedlist.NewLinkedList(sture.Compare[int])
 
 	ll.Append(1)
 	ll.Append(2)

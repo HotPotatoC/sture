@@ -6,6 +6,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/HotPotatoC/sture"
 	"github.com/HotPotatoC/sture/bstree"
 )
 
@@ -18,7 +19,7 @@ func randomIntRange(min, max int) int {
 }
 
 func BenchmarkBSTree_InsertRandom(b *testing.B) {
-	bst := bstree.New(1)
+	bst := bstree.New(1, sture.Compare[int])
 
 	for i := 0; i < b.N; i++ {
 		_ = bst.Insert(bst.Root(), randomIntRange(1, 10000))
@@ -39,7 +40,7 @@ func BenchmarkBSTree_SearchRandom_N(b *testing.B) {
 
 	for _, bb := range bc {
 		b.Run(bb.name, func(b *testing.B) {
-			bst := bstree.New(randomIntRange(1, bb.size))
+			bst := bstree.New(randomIntRange(1, bb.size), sture.Compare[int])
 
 			min := math.MaxInt
 
@@ -74,7 +75,7 @@ func BenchmarkBSTree_RemoveRandom_N(b *testing.B) {
 
 	for _, bb := range bc {
 		b.Run(bb.name, func(b *testing.B) {
-			bst := bstree.New(randomIntRange(1, bb.size))
+			bst := bstree.New(randomIntRange(1, bb.size), sture.Compare[int])
 
 			min := math.MaxInt
 

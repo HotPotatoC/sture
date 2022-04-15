@@ -1,18 +1,19 @@
 package bstree
 
-import (
-	"golang.org/x/exp/constraints"
-)
-
 // BSTree is a binary tree data structure.
-type BSTree[V constraints.Ordered] struct {
+type BSTree[V any] struct {
 	root *Node[V]
+	cmp  func(V, V) int
 }
 
-// New returns a new BinarySearchTree with the given value as the root.
-func New[V constraints.Ordered](rootVal V) *BSTree[V] {
+// New returns a new binary search tree with the given value as the root.
+// The second parameter is a function that returns -1, 0, or 1 depending on whether x < y, x == y, or x > y
+// Example Usage:
+//	bstree.New(1, sture.Compare[int])
+func New[V any](rootVal V, cmp func(a, b V) int) *BSTree[V] {
 	return &BSTree[V]{
 		root: NewNode(rootVal),
+		cmp:  cmp,
 	}
 }
 
@@ -23,15 +24,21 @@ func (bst *BSTree[V]) Root() *Node[V] {
 
 // Search returns the node with the given value if it exists in the tree.
 func (bst *BSTree[V]) Search(root *Node[V], query V) *Node[V] {
-	if root == nil || root.value == query {
+	if root == nil || bst.cmp(root.value, query) == 0 {
 		return root
 	}
 
-	if query < root.value {
-		return bst.Search(root.left, query)
+	for root != nil {
+		if bst.cmp(root.value, query) == 0 {
+			return root
+		} else if bst.cmp(root.value, query) > 0 {
+			root = root.left
+		} else {
+			root = root.right
+		}
 	}
 
-	return bst.Search(root.right, query)
+	return nil
 }
 
 // Insert inserts a new node into the tree.
@@ -41,17 +48,33 @@ func (bst *BSTree[V]) Insert(root *Node[V], value V) *Node[V] {
 		return NewNode(value)
 	}
 
-	if value < root.value {
-		// insert the node to the left of the root
-		root.left = bst.Insert(root.left, value)
-	} else if value > root.value {
-		// insert the node to the right of the root
-		root.right = bst.Insert(root.right, value)
+	for root != nil {
+		if bst.cmp(root.value, value) == 0 {
+			// the value is already in the tree, so we don't need to insert it
+			return root
+		} else if bst.cmp(root.value, value) > 0 {
+			// if the left child is nil, then we know we are inserting at this node
+			if root.left == nil {
+				root.left = NewNode(value)
+				return root.left
+			}
+			// otherwise we keep traversing down the left side of the tree
+			root = root.left
+		} else {
+			// if the right child is nil, then we know we are inserting at this node
+			if root.right == nil {
+				root.right = NewNode(value)
+				return root.right
+			}
+			// otherwise we keep traversing down the right side of the tree
+			root = root.right
+		}
 	}
 
-	return root
+	return nil
 }
 
+// InorderSuccessor returns the inorder successor of the given node.
 func (bst *BSTree[V]) InorderSuccessor(root *Node[V]) *Node[V] {
 	curr := root
 	for curr != nil && curr.left != nil {
@@ -66,12 +89,12 @@ func (bst *BSTree[V]) Remove(node *Node[V], query V) *Node[V] {
 		return nil
 	}
 
-	// Go left
-	if query < node.value {
+	if bst.cmp(node.value, query) > 0 {
 		node.left = bst.Remove(node.left, query)
 		return node
 	}
-	if query > node.value {
+
+	if bst.cmp(node.value, query) < 0 {
 		node.right = bst.Remove(node.right, query)
 		return node
 	}
